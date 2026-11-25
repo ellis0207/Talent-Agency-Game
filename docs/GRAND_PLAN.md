@@ -219,8 +219,8 @@ Clients, staff, teams, labels, studios, brands and execs are **procedurally gene
 - **Language:** GDScript for game code. Simulation rules (contracts, league rulesets, negotiation, events) are kept as data plus pure logic so they can be unit tested.
 - **Data-driven content:** leagues, rulesets, traits, events, names and dialogue live in data files (JSON or Godot resources), so adding a sport or event means adding data, not rewriting code.
 - **Art pipeline:** placeholder art first. Cartoon portraits built from layered 2D parts. Blender can be used for pre-rendering building pieces if useful, but the game itself is 2D. All assets must be original or commercially licensed.
-- **Testing:** automated tests for the simulation (GUT, a Godot unit test framework). Every phase ends with a build Ellis can run.
-- **Setup:** Claude will provide step-by-step setup for Godot and any tools when development begins.
+- **Testing:** automated tests for the simulation, using a small in-repo test runner (`tests/`) that works in the editor, on the command line and on GitHub. We can move to GUT (a Godot unit test framework) if the tests outgrow it. Every phase ends with a build Ellis can run.
+- **Setup:** step-by-step setup for Godot and tools is in [`docs/SETUP.md`](SETUP.md). The project targets **Godot 4.7** (standard edition).
 
 ## 10. Roadmap
 

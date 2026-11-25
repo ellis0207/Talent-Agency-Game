@@ -1,0 +1,36 @@
+{
+  "format": "league",
+  "version": 1,
+  "notes": "Sample of the league format. Fictional league; the rules are placeholders until Phase 3 models them properly.",
+  "id": "sbl",
+  "name": "Skyline Basketball League",
+  "short_name": "SBL",
+  "sport": "basketball",
+  "mirrors": "US pro basketball",
+  "region": "North America",
+  "tier": 1,
+  "rules": {
+    "salary_cap": 140000000,
+    "minimum_salary": 1200000,
+    "maximum_salary_share_of_cap": 0.35,
+    "roster_max": 15,
+    "agent_commission_cap": 0.04,
+    "rookie_scale": true,
+    "re_signing_advantage": true
+  },
+  "season": {
+    "start_week": 40,
+    "trade_deadline_week": 6,
+    "playoffs_start_week": 15,
+    "draft_week": 25,
+    "free_agency_week": 27
+  },
+  "teams": [
+    { "id": "hcg", "city": "Harbor City", "name": "Gulls" },
+    { "id": "ims", "city": "Iron Mesa", "name": "Scorpions" },
+    { "id": "nvl", "city": "New Valencia", "name": "Lanterns" },
+    { "id": "pfx", "city": "Port Felix", "name": "Tide" },
+    { "id": "ccb", "city": "Cedar Crossing", "name": "Bison" },
+    { "id": "sdm", "city": "Summit Dale", "name": "Monarchs" }
+  ]
+}

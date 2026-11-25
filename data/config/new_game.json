@@ -1,0 +1,15 @@
+{
+  "format": "new_game",
+  "version": 1,
+  "starting_cash": 1500,
+  "weekly_rent": 350,
+  "low_cash_warning_weeks": 2,
+  "opening_message": "Your agency opens Monday. You have one desk, a phone and enough cash for a month.",
+  "agency_names": [
+    "Starling Talent",
+    "Big Break Management",
+    "Corner Office Talent",
+    "Long Shot Agency",
+    "First Call Representation"
+  ]
+}

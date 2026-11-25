@@ -1,0 +1,48 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  godot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GODOT_VERSION: "4.7.2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Godot ${{ env.GODOT_VERSION }}
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -fsSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip
+          mv "Godot_v${GODOT_VERSION}-stable_linux.x86_64" godot
+          chmod +x godot
+          echo "GODOT=$RUNNER_TEMP/godot" >> "$GITHUB_ENV"
+          ./godot --version
+
+      - name: Import project
+        run: timeout 300 "$GODOT" --headless --path . --import 2>&1 | tee import.log
+
+      - name: Run tests
+        run: |
+          set -o pipefail
+          timeout 300 "$GODOT" --headless --path . -s res://tests/run_tests.gd 2>&1 | tee test.log
+          if grep -E "SCRIPT ERROR|Parse Error|ERROR:" test.log; then
+            echo "::error::Script errors were printed while running tests"
+            exit 1
+          fi
+
+      - name: Smoke test the main screen
+        run: |
+          set -o pipefail
+          timeout 300 "$GODOT" --headless --path . -- --smoke-test 2>&1 | tee smoke.log
+          grep -q "SMOKE OK" smoke.log
+          if grep -E "SCRIPT ERROR|Parse Error|ERROR:" smoke.log; then
+            echo "::error::Script errors were printed while running the main screen"
+            exit 1
+          fi
